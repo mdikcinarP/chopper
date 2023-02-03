@@ -42,8 +42,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     return _buildChopperApiImplementationClass(annotation, element);
   }
 
-  bool _extendsChopperService(InterfaceType type) =>
-      _typeChecker(chopper.ChopperService).isExactlyType(type);
+  bool _extendsChopperService(InterfaceType type) => _typeChecker(chopper.ChopperService).isExactlyType(type);
 
   Field _buildDefinitionTypeMethod(String superType) => Field(
         (method) => method
@@ -100,15 +99,12 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
         },
       );
 
-  Iterable<Method> _parseMethods(ClassElement element, String baseUrl) =>
-      element.methods
-          .where(
-            (MethodElement method) =>
-                _getMethodAnnotation(method) != null &&
-                method.isAbstract &&
-                method.returnType.isDartAsyncFuture,
-          )
-          .map((MethodElement m) => _generateMethod(m, baseUrl));
+  Iterable<Method> _parseMethods(ClassElement element, String baseUrl) => element.methods
+      .where(
+        (MethodElement method) =>
+            _getMethodAnnotation(method) != null && method.isAbstract && method.returnType.isDartAsyncFuture,
+      )
+      .map((MethodElement m) => _generateMethod(m, baseUrl));
 
   Method _generateMethod(MethodElement m, String baseUrl) {
     final ConstantReader? method = _getMethodAnnotation(m);
@@ -116,30 +112,20 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     final ConstantReader? factoryConverter = _getFactoryConverterAnnotation(m);
 
     final Map<String, ConstantReader> body = _getAnnotation(m, chopper.Body);
-    final Map<ParameterElement, ConstantReader> paths =
-        _getAnnotations(m, chopper.Path);
-    final Map<ParameterElement, ConstantReader> queries =
-        _getAnnotations(m, chopper.Query);
-    final Map<String, ConstantReader> queryMap =
-        _getAnnotation(m, chopper.QueryMap);
-    final Map<ParameterElement, ConstantReader> fields =
-        _getAnnotations(m, chopper.Field);
-    final Map<String, ConstantReader> fieldMap =
-        _getAnnotation(m, chopper.FieldMap);
-    final Map<ParameterElement, ConstantReader> parts =
-        _getAnnotations(m, chopper.Part);
-    final Map<String, ConstantReader> partMap =
-        _getAnnotation(m, chopper.PartMap);
-    final Map<ParameterElement, ConstantReader> fileFields =
-        _getAnnotations(m, chopper.PartFile);
-    final Map<String, ConstantReader> fileFieldMap =
-        _getAnnotation(m, chopper.PartFileMap);
+    final Map<ParameterElement, ConstantReader> paths = _getAnnotations(m, chopper.Path);
+    final Map<ParameterElement, ConstantReader> queries = _getAnnotations(m, chopper.Query);
+    final Map<String, ConstantReader> queryMap = _getAnnotation(m, chopper.QueryMap);
+    final Map<ParameterElement, ConstantReader> fields = _getAnnotations(m, chopper.Field);
+    final Map<String, ConstantReader> fieldMap = _getAnnotation(m, chopper.FieldMap);
+    final Map<ParameterElement, ConstantReader> parts = _getAnnotations(m, chopper.Part);
+    final Map<String, ConstantReader> partMap = _getAnnotation(m, chopper.PartMap);
+    final Map<ParameterElement, ConstantReader> fileFields = _getAnnotations(m, chopper.PartFile);
+    final Map<String, ConstantReader> fileFieldMap = _getAnnotation(m, chopper.PartFileMap);
 
     final Code? headers = _generateHeaders(m, method!);
     final Expression url = _generateUrl(method, paths, baseUrl);
     final DartType? responseType = _getResponseType(m.returnType);
-    final DartType? responseInnerType =
-        _getResponseInnerType(m.returnType) ?? responseType;
+    final DartType? responseInnerType = _getResponseInnerType(m.returnType) ?? responseType;
 
     return Method((MethodBuilder b) {
       b.annotations.add(refer('override'));
@@ -158,15 +144,11 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
       );
 
       b.requiredParameters.addAll(
-        m.parameters
-            .where((p) => p.isRequiredPositional)
-            .map(buildRequiredPositionalParam),
+        m.parameters.where((p) => p.isRequiredPositional).map(buildRequiredPositionalParam),
       );
 
       b.optionalParameters.addAll(
-        m.parameters
-            .where((p) => p.isOptionalPositional)
-            .map(buildOptionalPositionalParam),
+        m.parameters.where((p) => p.isOptionalPositional).map(buildOptionalPositionalParam),
       );
 
       b.optionalParameters.addAll(
@@ -179,9 +161,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
       if (queries.isNotEmpty) {
         blocks.add(
-          declareFinal(_parametersVar, type: refer('Map<String, dynamic>'))
-              .assign(_generateMap(queries))
-              .statement,
+          declareFinal(_parametersVar, type: refer('Map<String, dynamic>')).assign(_generateMap(queries)).statement,
         );
       }
 
@@ -256,9 +236,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
       bool hasParts = multipart && (parts.isNotEmpty || fileFields.isNotEmpty);
       if (hasParts) {
         blocks.add(
-          declareFinal(_partsVar, type: refer('List<PartValue>'))
-              .assign(_generateList(parts, fileFields))
-              .statement,
+          declareFinal(_partsVar, type: refer('List<PartValue>')).assign(_generateList(parts, fileFields)).statement,
         );
       }
 
@@ -272,9 +250,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
           );
         } else {
           blocks.add(
-            declareFinal(_partsVar, type: refer('List<PartValue>'))
-                .assign(refer(partMap.keys.first))
-                .statement,
+            declareFinal(_partsVar, type: refer('List<PartValue>')).assign(refer(partMap.keys.first)).statement,
           );
         }
       }
@@ -289,9 +265,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
           );
         } else {
           blocks.add(
-            declareFinal(_partsVar, type: refer('List<PartValue>'))
-                .assign(refer(fileFieldMap.keys.first))
-                .statement,
+            declareFinal(_partsVar, type: refer('List<PartValue>')).assign(refer(fileFieldMap.keys.first)).statement,
           );
         }
       }
@@ -313,6 +287,8 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
       final bool includeNullQueryVars = getIncludeNullQueryVars(method);
 
+      final bool encode = getEncode(method);
+
       blocks.add(
         declareFinal(_requestVar, type: refer('Request'))
             .assign(
@@ -324,6 +300,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
                 hasParts: hasParts,
                 useBrackets: useBrackets,
                 includeNullQueryVars: includeNullQueryVars,
+                encode: encode,
               ),
             )
             .statement,
@@ -333,41 +310,34 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
       final ConstantReader? requestFactory = factoryConverter?.peek('request');
       if (requestFactory != null) {
-        final ExecutableElement? func =
-            requestFactory.objectValue.toFunctionValue();
+        final ExecutableElement? func = requestFactory.objectValue.toFunctionValue();
         namedArguments['requestConverter'] = refer(_factoryForFunction(func!));
       }
 
-      final ConstantReader? responseFactory =
-          factoryConverter?.peek('response');
+      final ConstantReader? responseFactory = factoryConverter?.peek('response');
       if (responseFactory != null) {
-        final ExecutableElement? func =
-            responseFactory.objectValue.toFunctionValue();
+        final ExecutableElement? func = responseFactory.objectValue.toFunctionValue();
         namedArguments['responseConverter'] = refer(_factoryForFunction(func!));
       }
 
       final List<Reference> typeArguments = [];
       if (responseType != null) {
-        typeArguments
-            .add(refer(responseType.getDisplayString(withNullability: false)));
+        typeArguments.add(refer(responseType.getDisplayString(withNullability: false)));
         typeArguments.add(
           refer(responseInnerType!.getDisplayString(withNullability: false)),
         );
       }
 
-      blocks.add(refer('$_clientVar.send')
-          .call([refer(_requestVar)], namedArguments, typeArguments)
-          .returned
-          .statement);
+      blocks
+          .add(refer('$_clientVar.send').call([refer(_requestVar)], namedArguments, typeArguments).returned.statement);
 
       b.body = Block.of(blocks);
     });
   }
 
-  String _factoryForFunction(FunctionTypedElement function) =>
-      function.enclosingElement3 is ClassElement
-          ? '${function.enclosingElement3!.name}.${function.name}'
-          : function.name!;
+  String _factoryForFunction(FunctionTypedElement function) => function.enclosingElement3 is ClassElement
+      ? '${function.enclosingElement3!.name}.${function.name}'
+      : function.name!;
 
   Map<String, ConstantReader> _getAnnotation(MethodElement method, Type type) {
     DartObject? annotation;
@@ -407,8 +377,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
   ConstantReader? _getMethodAnnotation(MethodElement method) {
     for (final type in _methodsAnnotations) {
-      final DartObject? annotation = _typeChecker(type)
-          .firstAnnotationOf(method, throwOnUnresolved: false);
+      final DartObject? annotation = _typeChecker(type).firstAnnotationOf(method, throwOnUnresolved: false);
       if (annotation != null) {
         return ConstantReader(annotation);
       }
@@ -418,15 +387,14 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
   }
 
   ConstantReader? _getFactoryConverterAnnotation(MethodElement method) {
-    final DartObject? annotation = _typeChecker(chopper.FactoryConverter)
-        .firstAnnotationOf(method, throwOnUnresolved: false);
+    final DartObject? annotation =
+        _typeChecker(chopper.FactoryConverter).firstAnnotationOf(method, throwOnUnresolved: false);
 
     return annotation != null ? ConstantReader(annotation) : null;
   }
 
   bool _hasAnnotation(MethodElement method, Type type) =>
-      _typeChecker(type).firstAnnotationOf(method, throwOnUnresolved: false) !=
-      null;
+      _typeChecker(type).firstAnnotationOf(method, throwOnUnresolved: false) != null;
 
   final List<Type> _methodsAnnotations = const [
     chopper.Get,
@@ -440,23 +408,19 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
   ];
 
   DartType? _genericOf(DartType? type) =>
-      type is InterfaceType && type.typeArguments.isNotEmpty
-          ? type.typeArguments.first
-          : null;
+      type is InterfaceType && type.typeArguments.isNotEmpty ? type.typeArguments.first : null;
 
   DartType? _getResponseType(DartType type) => _genericOf(_genericOf(type));
 
   DartType? _getResponseInnerType(DartType type) {
     final DartType? generic = _genericOf(type);
 
-    if (generic == null ||
-        _typeChecker(Map).isExactlyType(type) ||
-        _typeChecker(BuiltMap).isExactlyType(type)) return type;
+    if (generic == null || _typeChecker(Map).isExactlyType(type) || _typeChecker(BuiltMap).isExactlyType(type))
+      return type;
 
     if (generic.isDynamic) return null;
 
-    if (_typeChecker(List).isExactlyType(type) ||
-        _typeChecker(BuiltList).isExactlyType(type)) return generic;
+    if (_typeChecker(List).isExactlyType(type) || _typeChecker(BuiltList).isExactlyType(type)) return generic;
 
     return _getResponseInnerType(generic);
   }
@@ -479,10 +443,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     } else if (path.isEmpty && baseUrl.isEmpty) {
       return _generateUri('');
     } else {
-      if (path.isNotEmpty &&
-          baseUrl.isNotEmpty &&
-          !baseUrl.endsWith('/') &&
-          !path.startsWith('/')) {
+      if (path.isNotEmpty && baseUrl.isNotEmpty && !baseUrl.endsWith('/') && !path.startsWith('/')) {
         return _generateUri('$baseUrl/$path');
       }
 
@@ -503,6 +464,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     bool useHeaders = false,
     bool useBrackets = false,
     bool includeNullQueryVars = false,
+    bool encode = true,
   }) {
     final List<Expression> params = [
       literal(getMethodName(method)),
@@ -535,6 +497,10 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
     if (includeNullQueryVars) {
       namedParams['includeNullQueryVars'] = literalBool(includeNullQueryVars);
+    }
+
+    if (encode) {
+      namedParams['encode'] = literalBool(encode);
     }
 
     return refer('Request').newInstance(params, namedParams);
@@ -590,8 +556,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     final StringBuffer codeBuffer = StringBuffer('')..writeln('{');
 
     // Search for @Header anotation in method parameters
-    final Map<ParameterElement, ConstantReader> annotations =
-        _getAnnotations(methodElement, chopper.Header);
+    final Map<ParameterElement, ConstantReader> annotations = _getAnnotations(methodElement, chopper.Header);
 
     annotations.forEach((parameter, ConstantReader annotation) {
       final String paramName = parameter.displayName;
@@ -607,8 +572,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     final ConstantReader? headersReader = method.peek('headers');
     if (headersReader == null) return null;
 
-    final Map<DartObject?, DartObject?> methodAnnotations =
-        headersReader.mapValue;
+    final Map<DartObject?, DartObject?> methodAnnotations = headersReader.mapValue;
 
     methodAnnotations.forEach((headerName, headerValue) {
       if (headerName != null && headerValue != null) {
@@ -623,9 +587,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
     return code == '{\n}\n'
         ? null
-        : declareFinal(_headersVar, type: refer('Map<String, String>'))
-            .assign(CodeExpression(Code(code)))
-            .statement;
+        : declareFinal(_headersVar, type: refer('Map<String, String>')).assign(CodeExpression(Code(code))).statement;
   }
 }
 
@@ -635,19 +597,17 @@ Builder chopperGeneratorFactoryBuilder({String? header}) => PartBuilder(
       header: header,
     );
 
-bool getMethodOptionalBody(ConstantReader method) =>
-    method.read('optionalBody').boolValue;
+bool getMethodOptionalBody(ConstantReader method) => method.read('optionalBody').boolValue;
 
 String getMethodPath(ConstantReader method) => method.read('path').stringValue;
 
-String getMethodName(ConstantReader method) =>
-    method.read('method').stringValue;
+String getMethodName(ConstantReader method) => method.read('method').stringValue;
 
-bool getUseBrackets(ConstantReader method) =>
-    method.peek('useBrackets')?.boolValue ?? false;
+bool getUseBrackets(ConstantReader method) => method.peek('useBrackets')?.boolValue ?? false;
 
-bool getIncludeNullQueryVars(ConstantReader method) =>
-    method.peek('includeNullQueryVars')?.boolValue ?? false;
+bool getIncludeNullQueryVars(ConstantReader method) => method.peek('includeNullQueryVars')?.boolValue ?? false;
+
+bool getEncode(ConstantReader method) => method.peek('encode')?.boolValue ?? true;
 
 extension DartTypeExtension on DartType {
   bool get isNullable => nullabilitySuffix != NullabilitySuffix.none;
@@ -663,8 +623,7 @@ Parameter buildRequiredPositionalParam(ParameterElement p) => Parameter(
     );
 
 // All optional positional params must support nullability
-Parameter buildOptionalPositionalParam(ParameterElement p) =>
-    Parameter((ParameterBuilder pb) {
+Parameter buildOptionalPositionalParam(ParameterElement p) => Parameter((ParameterBuilder pb) {
       pb
         ..name = p.name
         ..type = Reference(
@@ -678,8 +637,7 @@ Parameter buildOptionalPositionalParam(ParameterElement p) =>
 
 // Named params can be optional or required, they also need to support
 // nullability
-Parameter buildNamedParam(ParameterElement p) =>
-    Parameter((ParameterBuilder pb) {
+Parameter buildNamedParam(ParameterElement p) => Parameter((ParameterBuilder pb) {
       pb
         ..named = true
         ..name = p.name

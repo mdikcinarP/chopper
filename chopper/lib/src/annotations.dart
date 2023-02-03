@@ -195,6 +195,8 @@ class Method {
   /// The above code produces hxxp://path/to/script&foo=foo_var&bar=&baz=baz_var
   final bool includeNullQueryVars;
 
+  final bool encode;
+
   const Method(
     this.method, {
     this.optionalBody = false,
@@ -202,6 +204,7 @@ class Method {
     this.headers = const {},
     this.useBrackets = false,
     this.includeNullQueryVars = false,
+    this.encode = true,
   });
 }
 
@@ -214,6 +217,7 @@ class Get extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Get);
 }
 
@@ -240,6 +244,7 @@ class Delete extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Delete);
 }
 
@@ -254,6 +259,7 @@ class Put extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Put);
 }
 
@@ -267,6 +273,7 @@ class Patch extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Patch);
 }
 
@@ -279,6 +286,7 @@ class Head extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Head);
 }
 
@@ -290,6 +298,7 @@ class Options extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Options);
 }
 

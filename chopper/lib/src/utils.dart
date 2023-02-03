@@ -64,11 +64,13 @@ String mapToQuery(
   Map<String, dynamic> map, {
   bool useBrackets = false,
   bool includeNullQueryVars = false,
+  bool encode = true,
 }) =>
     _mapToQuery(
       map,
       useBrackets: useBrackets,
       includeNullQueryVars: includeNullQueryVars,
+      encode: encode,
     ).join('&');
 
 Iterable<_Pair<String, String>> _mapToQuery(
@@ -76,11 +78,12 @@ Iterable<_Pair<String, String>> _mapToQuery(
   String? prefix,
   bool useBrackets = false,
   bool includeNullQueryVars = false,
+  bool encode = true,
 }) {
   final Set<_Pair<String, String>> pairs = {};
 
   map.forEach((key, value) {
-    String name = Uri.encodeQueryComponent(key);
+    String name = encode ? Uri.encodeQueryComponent(key) : key;
 
     if (prefix != null) {
       name = useBrackets
@@ -142,9 +145,7 @@ class _Pair<A, B> {
   });
 
   @override
-  String toString() => useBrackets
-      ? '$first${Uri.encodeQueryComponent('[]')}=$second'
-      : '$first=$second';
+  String toString() => useBrackets ? '$first${Uri.encodeQueryComponent('[]')}=$second' : '$first=$second';
 }
 
 bool isTypeOf<ThisType, OfType>() => _Instance<ThisType>() is _Instance<OfType>;
