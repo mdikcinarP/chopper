@@ -232,6 +232,7 @@ class Post extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
+    super.encode,
   }) : super(HttpMethod.Post);
 }
 
