@@ -287,7 +287,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
 
       final bool includeNullQueryVars = getIncludeNullQueryVars(method);
 
-      final bool encode = getEncode(method);
+      final bool disableEncoding = getDisableEncoding(method);
 
       blocks.add(
         declareFinal(_requestVar, type: refer('Request'))
@@ -300,7 +300,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
                 hasParts: hasParts,
                 useBrackets: useBrackets,
                 includeNullQueryVars: includeNullQueryVars,
-                encode: encode,
+                disableEncoding: disableEncoding,
               ),
             )
             .statement,
@@ -464,7 +464,7 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
     bool useHeaders = false,
     bool useBrackets = false,
     bool includeNullQueryVars = false,
-    bool encode = true,
+    bool disableEncoding = false,
   }) {
     final List<Expression> params = [
       literal(getMethodName(method)),
@@ -499,8 +499,8 @@ class ChopperGenerator extends GeneratorForAnnotation<chopper.ChopperApi> {
       namedParams['includeNullQueryVars'] = literalBool(includeNullQueryVars);
     }
 
-    if (encode) {
-      namedParams['encode'] = literalBool(encode);
+    if (disableEncoding) {
+      namedParams['disableEncoding'] = literalBool(disableEncoding);
     }
 
     return refer('Request').newInstance(params, namedParams);
@@ -607,7 +607,7 @@ bool getUseBrackets(ConstantReader method) => method.peek('useBrackets')?.boolVa
 
 bool getIncludeNullQueryVars(ConstantReader method) => method.peek('includeNullQueryVars')?.boolValue ?? false;
 
-bool getEncode(ConstantReader method) => method.peek('encode')?.boolValue ?? true;
+bool getDisableEncoding(ConstantReader method) => method.peek('disableEncoding')?.boolValue ?? false;
 
 extension DartTypeExtension on DartType {
   bool get isNullable => nullabilitySuffix != NullabilitySuffix.none;
