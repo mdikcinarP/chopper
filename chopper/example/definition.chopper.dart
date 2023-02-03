@@ -23,6 +23,7 @@ class _$MyService extends MyService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -40,6 +41,7 @@ class _$MyService extends MyService {
       client.baseUrl,
       parameters: $params,
       headers: $headers,
+      encode: true,
     );
     return client.send<Map<dynamic, dynamic>, Map<dynamic, dynamic>>($request);
   }
@@ -51,6 +53,7 @@ class _$MyService extends MyService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client
         .send<List<Map<dynamic, dynamic>>, Map<dynamic, dynamic>>($request);
@@ -71,6 +74,7 @@ class _$MyService extends MyService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -102,6 +106,7 @@ class _$MyService extends MyService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -121,6 +126,7 @@ class _$MyService extends MyService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }

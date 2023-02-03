@@ -30,6 +30,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       headers: $headers,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -41,6 +42,7 @@ class _$HttpTestService extends HttpTestService {
       'HEAD',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -52,6 +54,7 @@ class _$HttpTestService extends HttpTestService {
       'OPTIONS',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -63,6 +66,7 @@ class _$HttpTestService extends HttpTestService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<Stream<List<int>>, int>($request);
   }
@@ -74,6 +78,7 @@ class _$HttpTestService extends HttpTestService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -85,6 +90,7 @@ class _$HttpTestService extends HttpTestService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -106,6 +112,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -119,6 +126,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -136,6 +144,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -157,6 +166,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -178,6 +188,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -191,6 +202,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -204,6 +216,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -217,6 +230,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -230,6 +244,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -246,6 +261,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -261,6 +277,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       headers: $headers,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -277,6 +294,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -290,6 +308,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -303,6 +322,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>(
       $request,
@@ -323,6 +343,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       body: $body,
       headers: $headers,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -342,6 +363,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>(
       $request,
@@ -358,6 +380,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       body: $body,
+      encode: true,
     );
     return client.send<dynamic, dynamic>(
       $request,
@@ -388,6 +411,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -407,6 +431,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -426,6 +451,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -452,6 +478,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -471,6 +498,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parts: $parts,
       multipart: true,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -482,6 +510,7 @@ class _$HttpTestService extends HttpTestService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send($request);
   }
@@ -493,6 +522,7 @@ class _$HttpTestService extends HttpTestService {
       'GET',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<List<String>, String>($request);
   }
@@ -504,6 +534,7 @@ class _$HttpTestService extends HttpTestService {
       'POST',
       $url,
       client.baseUrl,
+      encode: true,
     );
     return client.send<dynamic, dynamic>($request);
   }
@@ -526,6 +557,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parameters: $params,
       includeNullQueryVars: true,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -539,6 +571,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -554,6 +587,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parameters: $params,
       useBrackets: true,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -567,6 +601,7 @@ class _$HttpTestService extends HttpTestService {
       $url,
       client.baseUrl,
       parameters: $params,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -582,6 +617,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parameters: $params,
       includeNullQueryVars: true,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
@@ -597,6 +633,7 @@ class _$HttpTestService extends HttpTestService {
       client.baseUrl,
       parameters: $params,
       useBrackets: true,
+      encode: true,
     );
     return client.send<String, String>($request);
   }
