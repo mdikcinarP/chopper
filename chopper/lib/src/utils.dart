@@ -101,7 +101,7 @@ Iterable<_Pair<String, String>> _mapToQuery(
             prefix: name,
             useBrackets: useBrackets,
             includeNullQueryVars: includeNullQueryVars,
-            encode: encode,
+            disableEncoding: disableEncoding,
           ),
         );
       } else {
