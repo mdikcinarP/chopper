@@ -64,13 +64,13 @@ String mapToQuery(
   Map<String, dynamic> map, {
   bool useBrackets = false,
   bool includeNullQueryVars = false,
-  bool encode = true,
+  bool disableEncoding = false,
 }) =>
     _mapToQuery(
       map,
       useBrackets: useBrackets,
       includeNullQueryVars: includeNullQueryVars,
-      encode: encode,
+      disableEncoding: disableEncoding,
     ).join('&');
 
 Iterable<_Pair<String, String>> _mapToQuery(
@@ -78,12 +78,12 @@ Iterable<_Pair<String, String>> _mapToQuery(
   String? prefix,
   bool useBrackets = false,
   bool includeNullQueryVars = false,
-  bool encode = true,
+  bool disableEncoding = false,
 }) {
   final Set<_Pair<String, String>> pairs = {};
 
   map.forEach((key, value) {
-    String name = encode ? Uri.encodeQueryComponent(key) : key;
+    String name = disableEncoding ? key : Uri.encodeQueryComponent(key);
 
     if (prefix != null) {
       name = useBrackets

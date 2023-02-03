@@ -15,7 +15,7 @@ class Request extends http.BaseRequest {
   final List<PartValue> parts;
   final bool useBrackets;
   final bool includeNullQueryVars;
-  final bool encode;
+  final bool disableEncoding;
 
   Request(
     String method,
@@ -28,7 +28,7 @@ class Request extends http.BaseRequest {
     this.parts = const [],
     this.useBrackets = false,
     this.includeNullQueryVars = false,
-    this.encode = true,
+    this.disableEncoding = false,
   })  : assert(
             !baseUri.hasQuery,
             'baseUri should not contain query parameters.'
@@ -43,7 +43,7 @@ class Request extends http.BaseRequest {
             {...uri.queryParametersAll, ...?parameters},
             useBrackets: useBrackets,
             includeNullQueryVars: includeNullQueryVars,
-            encode: encode,
+            disableEncoding: disableEncoding,
           ),
         ) {
     this.headers.addAll(headers);
@@ -61,7 +61,7 @@ class Request extends http.BaseRequest {
     List<PartValue>? parts,
     bool? useBrackets,
     bool? includeNullQueryVars,
-    bool? encode,
+    bool? disableEncoding,
   }) =>
       Request(
         method ?? this.method,
@@ -74,7 +74,7 @@ class Request extends http.BaseRequest {
         parts: parts ?? this.parts,
         useBrackets: useBrackets ?? this.useBrackets,
         includeNullQueryVars: includeNullQueryVars ?? this.includeNullQueryVars,
-        encode: encode ?? this.encode,
+        disableEncoding: disableEncoding ?? this.disableEncoding,
       );
 
   /// Builds a valid URI from [baseUrl], [url] and [parameters].
@@ -87,7 +87,7 @@ class Request extends http.BaseRequest {
     Map<String, dynamic> parameters, {
     bool useBrackets = false,
     bool includeNullQueryVars = false,
-    bool encode = true,
+    bool disableEncoding = false,
   }) {
     // If the request's url is already a fully qualified URL, we can use it
     // as-is and ignore the baseUrl.
@@ -103,7 +103,7 @@ class Request extends http.BaseRequest {
       allParameters,
       useBrackets: useBrackets,
       includeNullQueryVars: includeNullQueryVars,
-      encode: encode,
+      disableEncoding: disableEncoding,
     );
 
     return query.isNotEmpty ? uri.replace(query: query) : uri;

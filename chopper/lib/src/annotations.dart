@@ -195,7 +195,7 @@ class Method {
   /// The above code produces hxxp://path/to/script&foo=foo_var&bar=&baz=baz_var
   final bool includeNullQueryVars;
 
-  final bool encode;
+  final bool disableEncoding;
 
   const Method(
     this.method, {
@@ -204,7 +204,7 @@ class Method {
     this.headers = const {},
     this.useBrackets = false,
     this.includeNullQueryVars = false,
-    this.encode = true,
+    this.disableEncoding = false,
   });
 }
 
@@ -217,7 +217,7 @@ class Get extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Get);
 }
 
@@ -232,7 +232,7 @@ class Post extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Post);
 }
 
@@ -245,7 +245,7 @@ class Delete extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Delete);
 }
 
@@ -260,7 +260,7 @@ class Put extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Put);
 }
 
@@ -274,7 +274,7 @@ class Patch extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Patch);
 }
 
@@ -287,7 +287,7 @@ class Head extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Head);
 }
 
@@ -299,7 +299,7 @@ class Options extends Method {
     super.headers,
     super.useBrackets,
     super.includeNullQueryVars,
-    super.encode,
+    super.disableEncoding,
   }) : super(HttpMethod.Options);
 }
 
